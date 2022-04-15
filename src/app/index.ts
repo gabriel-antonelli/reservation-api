@@ -1,6 +1,6 @@
 import express from 'express';
 import 'dotenv/config';
-import router from '../adapter/input/router';
+import router from './router';
 import { Logger, morganMiddleware } from '../config';
 
 const app = express();
