@@ -1,6 +1,5 @@
-import { HttpRequest, HttpResponse } from '../port/http-port';
+import { HttpRequest, HttpResponse } from '.';
 
 export interface Controller {
-	get?: (req: HttpRequest) => Promise<HttpResponse>;
-	post?: (req: HttpRequest) => Promise<HttpResponse>;
+	handle: (req: HttpRequest) => Promise<HttpResponse>;
 }

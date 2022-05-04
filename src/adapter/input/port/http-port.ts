@@ -1,15 +1,11 @@
-type ResponseBody =
+type JsonBody =
 	| string
 	| number
 	| boolean
-	| { [x: string]: ResponseBody }
-	| Array<ResponseBody>;
-
-export interface HttpRequest {
-	body?: ResponseBody;
-}
+	| { [x: string]: JsonBody }
+	| Array<JsonBody>;
 
 export interface HttpResponse {
 	statusCode: number;
-	body: ResponseBody;
+	body: JsonBody;
 }
