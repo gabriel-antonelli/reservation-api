@@ -1,24 +1,13 @@
 import { Request, Response } from 'express';
-import { Controller } from '../../adapter/input/port/controller-port';
-import { HttpRequest, HttpResponse } from '../../adapter/input/port/http-port';
+import { Controller } from '@/adapter/input/port';
 
 export const routerAdapter = (controller: Controller) => {
 	return async (req: Request, res: Response): Promise<Response> => {
-		const httpRequest: HttpRequest = {
-			body: req.body,
+		const httpRequest = {
+			...(req.body || {}),
+			...(req.params || {}),
 		};
-		let httpResponse: HttpResponse;
-
-		switch (req.method) {
-			case 'GET':
-				httpResponse = (await controller.get?.(httpRequest)) as HttpResponse;
-				break;
-			default:
-				httpResponse = {
-					statusCode: 500,
-					body: 'Unknown Internal Server Error',
-				};
-		}
+		const httpResponse = await controller.handle(httpRequest);
 		return res.status(httpResponse.statusCode).json(httpResponse.body);
 	};
 };

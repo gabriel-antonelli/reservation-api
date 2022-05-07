@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { Event } from '../adapter/input/controllers/events';
 import { routerAdapter } from './adapters/routerAdapter';
+import { makeCreateUserController } from './factories/createUserFactory';
 
 const router = Router();
-router.get('/', routerAdapter(new Event()));
+router.post('/user/create', routerAdapter(makeCreateUserController()));
 export default router;
