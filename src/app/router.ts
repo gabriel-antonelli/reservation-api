@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { CreateUser } from '@/adapter/input/controllers/createUser';
 import { routerAdapter } from './adapters/routerAdapter';
+import { makeCreateUserController } from './factories/createUserFactory';
 
 const router = Router();
-router.post('/user/create', routerAdapter(new CreateUser()));
+router.post('/user/create', routerAdapter(makeCreateUserController()));
 export default router;

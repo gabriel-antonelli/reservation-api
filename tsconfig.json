@@ -1,24 +1,14 @@
 {
-  "extends": "@tsconfig/node16/tsconfig.json",
-  "compilerOptions": {
-    "sourceMap": true,
-    "rootDirs": [
-      "src",
-      "tests"
-    ],
-    "baseUrl": "src",
-    "paths": {
-      "@/tests/*": [
-        "../tests/*"
-      ],
-      "@/*": [
-        "*"
-      ]
-    }
-  },
-  "include": [
-    "src",
-    "tests"
-  ],
-  "exclude": []
+	"extends": "@tsconfig/node16/tsconfig.json",
+	"compilerOptions": {
+		"sourceMap": true,
+		"rootDirs": ["src", "tests"],
+		"baseUrl": "src",
+		"paths": {
+			"@/tests/*": ["../tests/*"],
+			"@/*": ["*"]
+		}
+	},
+	"include": ["src", "tests"],
+	"exclude": []
 }
