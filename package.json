@@ -53,10 +53,5 @@
   },
   "prisma": {
     "schema": "src/external/repositories/postgres-prisma/config/schema.prisma"
-  },
-  "lint-staged": {
-    "*.{js,ts}": "eslint --cache --fix",
-    "*.{ts,js,css,md}": "prettier --write",
-    "*.{ts,js}": "npm run test:staged"
   }
 }
