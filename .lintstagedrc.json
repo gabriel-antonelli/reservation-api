@@ -1,7 +1,3 @@
 {
-  "*.ts": [
-    "eslint . --fix",
-    "npm run prettier",
-    "npm run test:staged"
-  ]
+	"*.ts": ["eslint . --fix", "npm run prettier", "npm run test:staged"]
 }
