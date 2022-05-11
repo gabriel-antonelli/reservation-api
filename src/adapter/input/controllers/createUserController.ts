@@ -15,7 +15,7 @@ export class CreateUserController implements Controller {
 		this.createUser = createUser;
 	}
 
-	async handle(req: any): Promise<HttpResponse> {
+	async handle(req: UserData): Promise<HttpResponse> {
 		try {
 			const isRequestValid = validateRequest(
 				['name', 'email', 'password'],
