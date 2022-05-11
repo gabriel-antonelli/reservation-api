@@ -1,57 +1,59 @@
 {
-	"name": "reservation-api",
-	"version": "1.0.0",
-	"description": "",
-	"main": "src/app/index.ts",
-	"scripts": {
-		"start": "nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register src/app/index.ts' -e ts",
-		"db-up": "docker-compose up -d",
-		"update": "npx npm-check-updates -u && npm i",
-		"lint": "npx eslint --ext .js,.ts .",
-		"prettier": "npx prettier --write .",
-		"prettier-check": "npx prettier --check .",
-		"test": "jest --passWithNoTests --runInBand --no-cache",
-		"test:unit": "npm test -- -c jest-unit-config.ts",
-		"test:staged": "npm test -- --findRelatedTests",
-		"test:ci": "npm test -- --coverage",
-		"prepare": "husky install"
-	},
-	"author": "Gabriel Antonelli",
-	"license": "ISC",
-	"devDependencies": {
-		"@tsconfig/node16": "^1.0.2",
-		"@types/express": "^4.17.13",
-		"@types/jest": "^27.5.0",
-		"@types/node": "^17.0.32",
-		"@typescript-eslint/eslint-plugin": "^5.23.0",
-		"@typescript-eslint/parser": "^5.23.0",
-		"eslint": "^8.15.0",
-		"eslint-plugin-import": "^2.26.0",
-		"eslint-plugin-node": "^11.1.0",
-		"eslint-plugin-promise": "^6.0.0",
-		"husky": "^8.0.1",
-		"jest": "^28.1.0",
-		"lint-staged": "^12.4.1",
-		"nodemon": "^2.0.16",
-		"prettier": "^2.6.2",
-		"prisma": "^3.14.0",
-		"ts-jest": "^28.0.2",
-		"ts-node": "^10.7.0",
-		"tsconfig-paths": "^4.0.0",
-		"typescript": "^4.6.4"
-	},
-	"dependencies": {
-		"@prisma/client": "^3.14.0",
-		"@types/morgan": "^1.9.3",
-		"argon2": "^0.28.5",
-		"dotenv": "^16.0.1",
-		"express": "^4.18.1",
-		"helmet": "^5.0.2",
-		"module-alias": "^2.2.2",
-		"morgan": "^1.10.0",
-		"winston": "^3.7.2"
-	},
-	"prisma": {
-		"schema": "src/external/repositories/postgres-prisma/config/schema.prisma"
-	}
+  "name": "reservation-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app/index.ts",
+  "scripts": {
+    "start": "nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register src/app/index.ts' -e ts",
+    "db-up": "docker-compose up -d",
+    "update": "npx npm-check-updates -u && npm i",
+    "lint": "npx eslint --ext .js,.ts .",
+    "prettier": "npx prettier --write .",
+    "prettier-check": "npx prettier --check .",
+    "test": "jest --passWithNoTests --runInBand --no-cache",
+    "test:unit": "npm test -- -c jest-unit-config.ts",
+    "test:staged": "npm test -- --findRelatedTests",
+    "test:ci": "npm test -- --coverage",
+    "prepare": "husky install"
+  },
+  "author": "Gabriel Antonelli",
+  "license": "ISC",
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.2",
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.5.0",
+    "@types/node": "^17.0.32",
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
+    "@typescript-eslint/parser": "^5.23.0",
+    "eslint": "^8.15.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "husky": "^8.0.1",
+    "jest": "^28.1.0",
+    "lint-staged": "^12.4.1",
+    "nodemon": "^2.0.16",
+    "prettier": "^2.6.2",
+    "prisma": "^3.14.0",
+    "ts-jest": "^28.0.2",
+    "ts-node": "^10.7.0",
+    "tsconfig-paths": "^4.0.0",
+    "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.14.0",
+    "@types/morgan": "^1.9.3",
+    "argon2": "^0.28.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "helmet": "^5.0.2",
+    "module-alias": "^2.2.2",
+    "morgan": "^1.10.0",
+    "winston": "^3.7.2"
+  },
+  "engines": {
+    "node": ">=16.15.0"
+  },
+  "prisma": {
+    "schema": "src/external/repositories/postgres-prisma/config/schema.prisma"
+  }
 }
