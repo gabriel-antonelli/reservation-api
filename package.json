@@ -5,6 +5,7 @@
   "main": "src/app/index.ts",
   "scripts": {
     "start": "nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register src/app/index.ts' -e ts",
+    "debug": "nodemon --watch 'src/' --exec 'node -r tsconfig-paths/register -r ts-node/register --inspect src/app/index.ts' -e ts",
     "db-up": "docker-compose up -d",
     "update": "npx npm-check-updates -u && npm i",
     "lint": "npx eslint --ext .js,.ts .",
