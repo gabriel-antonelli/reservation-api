@@ -3,19 +3,14 @@ import { UserRepository } from '@/core/use-case/ports';
 import { prisma } from './config/prismaClient';
 
 export class UserRepositoryPrisma implements UserRepository {
-	async create(userData: UserData): Promise<boolean> {
-		try {
-			await prisma.user.create({
-				data: {
-					name: userData.name,
-					email: userData.email,
-					password: userData.password,
-				},
-			});
-			return true;
-		} catch (error) {
-			return false;
-		}
+	async create(userData: UserData): Promise<void> {
+		await prisma.user.create({
+			data: {
+				name: userData.name,
+				email: userData.email,
+				password: userData.password,
+			},
+		});
 	}
 
 	async exists(email: string): Promise<boolean> {

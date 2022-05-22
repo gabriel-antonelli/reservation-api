@@ -33,11 +33,11 @@ export class CreateUserImp implements CreateUser {
 		const hashedPassword = await this.passwordEncryptor.encrypt(
 			user.password.value
 		);
-		const createOrError = await this.userRepository.create({
+		await this.userRepository.create({
 			name: user.name.value,
 			email: email,
 			password: hashedPassword,
 		});
-		return right(createOrError);
+		return right(true);
 	}
 }
