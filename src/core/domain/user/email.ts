@@ -3,10 +3,7 @@ import { InvalidEmailError } from './errors/invalidEmail';
 import { isEmailValid } from './validators/emailValidator';
 
 export class Email {
-	private readonly email: string;
-
-	constructor(email: string) {
-		this.email = email;
+	constructor(private readonly email: string) {
 		Object.freeze(this);
 	}
 	static create(email: string): Either<InvalidEmailError, Email> {

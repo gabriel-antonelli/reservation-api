@@ -9,11 +9,7 @@ import {
 import { validateRequest } from '../validators/requestValidator';
 
 export class CreateUserController implements Controller {
-	private readonly createUser: CreateUser;
-
-	constructor(createUser: CreateUser) {
-		this.createUser = createUser;
-	}
+	constructor(private readonly createUser: CreateUser) {}
 
 	async handle(req: UserData): Promise<HttpResponse> {
 		try {

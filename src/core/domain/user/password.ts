@@ -3,10 +3,7 @@ import { InvalidPasswordError } from './errors/invalidPassword';
 import { isPasswordValid } from './validators/passwordValidator';
 
 export class Password {
-	private readonly password: string;
-
-	constructor(password: string) {
-		this.password = password;
+	constructor(private readonly password: string) {
 		Object.freeze(this);
 	}
 	static create(password: string): Either<InvalidPasswordError, Password> {

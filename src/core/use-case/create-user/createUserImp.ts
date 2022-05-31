@@ -8,16 +8,10 @@ import { CreateUserResponse } from './createUserResponse';
 import { PasswordEncryptor } from '../ports';
 
 export class CreateUserImp implements CreateUser {
-	private readonly userRepository: UserRepository;
-	private readonly passwordEncryptor: PasswordEncryptor;
-
 	constructor(
-		userRepository: UserRepository,
-		passwordEncryptor: PasswordEncryptor
-	) {
-		this.userRepository = userRepository;
-		this.passwordEncryptor = passwordEncryptor;
-	}
+		private readonly userRepository: UserRepository,
+		private readonly passwordEncryptor: PasswordEncryptor
+	) {}
 
 	async createUser(userData: UserData): Promise<CreateUserResponse> {
 		const userOrError = User.create(userData);
