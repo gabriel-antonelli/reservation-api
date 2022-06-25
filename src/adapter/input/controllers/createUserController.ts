@@ -6,16 +6,20 @@ import {
 	ok,
 	serverError,
 } from '@/adapter/input/helpers/httpHelper';
+import { validateRequest } from '../validators/requestValidator';
 
 export class CreateUserController implements Controller {
-	private readonly createUser: CreateUser;
-
-	constructor(createUser: CreateUser) {
-		this.createUser = createUser;
-	}
+	constructor(private readonly createUser: CreateUser) {}
 
 	async handle(req: UserData): Promise<HttpResponse> {
 		try {
+			const isRequestValid = validateRequest(
+				['name', 'email', 'password'],
+				req
+			);
+			if (isRequestValid.isLeft()) {
+				return badRequest(isRequestValid.value);
+			}
 			const createUserResponse = await this.createUser.createUser(req);
 			if (createUserResponse.isLeft()) {
 				return badRequest(createUserResponse.value);

@@ -6,14 +6,11 @@ import { UserData } from './userData';
 import { UserType } from './userType';
 
 export class User {
-	public readonly name: Name;
-	public readonly email: Email;
-	public readonly password: Password;
-
-	private constructor(name: Name, email: Email, password: Password) {
-		this.name = name;
-		this.email = email;
-		this.password = password;
+	private constructor(
+		public readonly name: Name,
+		public readonly email: Email,
+		public readonly password: Password
+	) {
 		Object.freeze(this);
 	}
 
