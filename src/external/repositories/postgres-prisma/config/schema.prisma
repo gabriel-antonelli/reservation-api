@@ -1,15 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("POSTGRES_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
+model Users {
+  id                 Int       @id @default(autoincrement())
+  email              String    @unique @db.VarChar(255)
+  name               String    @db.VarChar(255)
+  password           String
+  resetPasswordToken String?
+  resetPasswordDate  DateTime?
+  Events             Events[]
+  Chairs             Chairs[]
 }
 
-model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  name     String
-  password String
+model Events {
+  id                 Int                  @id @default(autoincrement())
+  userId             Int
+  title              String               @db.VarChar(150)
+  subjects           String[]
+  categories         String[]
+  description        String               @db.VarChar(450)
+  isPrivate          Boolean
+  ageGroup           String               @db.VarChar(20)
+  Users              Users                @relation(fields: [userId], references: [id])
+  Rooms              Rooms[]
+  EventsLocalization EventsLocalization[]
+}
+
+model EventsLocalization {
+  id          Int    @id @default(autoincrement())
+  eventId     Int
+  name        String @db.VarChar(150)
+  description String @db.VarChar(450)
+  address     String @db.VarChar(150)
+  state       String @db.VarChar(50)
+  city        String @db.VarChar(50)
+  country     String @db.VarChar(50)
+  Events      Events @relation(fields: [eventId], references: [id])
+}
+
+model Rooms {
+  id          Int       @id @default(autoincrement())
+  eventId     Int
+  type        String    @db.VarChar(150)
+  initialDate DateTime
+  endDate     DateTime
+  duration    String
+  seelingEnd  DateTime
+  chairs      Int
+  Events      Events    @relation(fields: [eventId], references: [id])
+  Tickets     Tickets[]
+  Chairs      Chairs[]
+}
+
+model Tickets {
+  id       Int      @id @default(autoincrement())
+  roomId   Int
+  type     String   @db.VarChar(150)
+  price    Decimal
+  quantity Int
+  Rooms    Rooms    @relation(fields: [roomId], references: [id])
+  Chairs   Chairs[]
+}
+
+model Chairs {
+  id                  Int      @id @default(autoincrement())
+  userId              Int
+  roomId              Int
+  ticketId            Int
+  chairIndetification String   @db.VarChar(30)
+  updatedAt           DateTime @default(now())
+  Users               Users    @relation(fields: [userId], references: [id])
+  Rooms               Rooms    @relation(fields: [roomId], references: [id])
+  Tickets             Tickets  @relation(fields: [ticketId], references: [id])
 }

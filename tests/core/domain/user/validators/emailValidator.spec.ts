@@ -21,8 +21,8 @@ describe('Email validator', () => {
 		expect(isEmailValid('test@.test.com')).toBeFalsy();
 	});
 
-	test('Should not accept email with more than 256 characters', () => {
-		const longString = 't'.repeat(257);
+	test('Should not accept email with more than 255 characters', () => {
+		const longString = 't'.repeat(256);
 		const longEmail = `${longString}@test.com`;
 
 		expect(isEmailValid(longEmail)).toBeFalsy();
