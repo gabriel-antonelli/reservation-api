@@ -8,7 +8,7 @@ import { morganMiddleware } from './middlewares';
 const app = express();
 const port = process.env.PORT;
 
-setupRouter(app);
 app.use(morganMiddleware, express.json(), helmet());
+setupRouter(app);
 
 app.listen(port, () => Logger.info(`Started server at ${port}`));
