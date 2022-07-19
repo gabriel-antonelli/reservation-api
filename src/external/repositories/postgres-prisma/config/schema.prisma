@@ -7,32 +7,32 @@ datasource db {
   url      = env("POSTGRES_URL")
 }
 
-model Users {
+model User {
   id                 Int       @id @default(autoincrement())
   email              String    @unique @db.VarChar(255)
   name               String    @db.VarChar(255)
   password           String
   resetPasswordToken String?
   resetPasswordDate  DateTime?
-  Events             Events[]
-  Chairs             Chairs[]
+  Event              Event[]
+  Chair              Chair[]
 }
 
-model Events {
-  id                 Int                  @id @default(autoincrement())
-  userId             Int
-  title              String               @db.VarChar(150)
-  subjects           String[]
-  categories         String[]
-  description        String               @db.VarChar(450)
-  isPrivate          Boolean
-  ageGroup           String               @db.VarChar(20)
-  Users              Users                @relation(fields: [userId], references: [id])
-  Rooms              Rooms[]
-  EventsLocalization EventsLocalization[]
+model Event {
+  id                Int                 @id @default(autoincrement())
+  userId            Int
+  title             String              @db.VarChar(150)
+  subjects          String[]
+  categories        String[]
+  description       String              @db.VarChar(450)
+  isPrivate         Boolean
+  ageGroup          String              @db.VarChar(20)
+  User              User                @relation(fields: [userId], references: [id])
+  Room              Room[]
+  EventLocalization EventLocalization[]
 }
 
-model EventsLocalization {
+model EventLocalization {
   id          Int    @id @default(autoincrement())
   eventId     Int
   name        String @db.VarChar(150)
@@ -41,41 +41,41 @@ model EventsLocalization {
   state       String @db.VarChar(50)
   city        String @db.VarChar(50)
   country     String @db.VarChar(50)
-  Events      Events @relation(fields: [eventId], references: [id])
+  Event       Event  @relation(fields: [eventId], references: [id])
 }
 
-model Rooms {
-  id          Int       @id @default(autoincrement())
+model Room {
+  id          Int      @id @default(autoincrement())
   eventId     Int
-  type        String    @db.VarChar(150)
+  type        String   @db.VarChar(150)
   initialDate DateTime
   endDate     DateTime
   duration    String
   seelingEnd  DateTime
   chairs      Int
-  Events      Events    @relation(fields: [eventId], references: [id])
-  Tickets     Tickets[]
-  Chairs      Chairs[]
+  Event       Event    @relation(fields: [eventId], references: [id])
+  Ticket      Ticket[]
+  Chair       Chair[]
 }
 
-model Tickets {
-  id       Int      @id @default(autoincrement())
+model Ticket {
+  id       Int     @id @default(autoincrement())
   roomId   Int
-  type     String   @db.VarChar(150)
+  type     String  @db.VarChar(150)
   price    Decimal
   quantity Int
-  Rooms    Rooms    @relation(fields: [roomId], references: [id])
-  Chairs   Chairs[]
+  Room     Room    @relation(fields: [roomId], references: [id])
+  Chair    Chair[]
 }
 
-model Chairs {
+model Chair {
   id                  Int      @id @default(autoincrement())
   userId              Int
   roomId              Int
   ticketId            Int
   chairIndetification String   @db.VarChar(30)
   updatedAt           DateTime @default(now())
-  Users               Users    @relation(fields: [userId], references: [id])
-  Rooms               Rooms    @relation(fields: [roomId], references: [id])
-  Tickets             Tickets  @relation(fields: [ticketId], references: [id])
+  User                User     @relation(fields: [userId], references: [id])
+  Room                Room     @relation(fields: [roomId], references: [id])
+  Ticket              Ticket   @relation(fields: [ticketId], references: [id])
 }
