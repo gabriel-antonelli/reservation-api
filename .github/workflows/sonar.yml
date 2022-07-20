@@ -33,7 +33,7 @@ jobs:
       - name: Run coverage
         uses: KengoTODA/actions-setup-docker-compose@main
         with:
-          version: '3.1'
+          version: '2.7.0'
         env:
           POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
           run: npm run test:ci
