@@ -1,7 +1,13 @@
-import { Router } from 'express';
-import { routerAdapter } from './adapters/routerAdapter';
-import { makeCreateUserController } from './factories/createUserFactory';
+import { Router, Express } from 'express';
+import { readdirSync } from 'fs';
+import { join } from 'path';
 
-const router = Router();
-router.post('/user/create', routerAdapter(makeCreateUserController()));
-export default router;
+export default (app: Express): void => {
+	const router: Router = Router();
+	app.use('/api/v1', router);
+	readdirSync(join(__dirname, './routes')).map(async (file) => {
+		if (!file.endsWith('.map')) {
+			(await import(`./routes/${file}`)).default(router);
+		}
+	});
+};
