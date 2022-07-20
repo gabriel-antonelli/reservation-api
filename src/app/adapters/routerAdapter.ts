@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Controller } from '@/adapter/input/port';
+import { Controller } from '@/adapter/input/ports';
 
 export const routerAdapter = (controller: Controller) => {
 	return async (req: Request, res: Response): Promise<Response> => {

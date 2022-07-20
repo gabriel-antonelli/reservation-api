@@ -1,4 +1,4 @@
-import { CreateUserController } from '@/adapter/input/controllers/createUserController';
+import { CreateUserController } from '@/adapter/input/controllers/user/createUserController';
 import { CreateUserImp } from '@/core/use-case/create-user';
 import { PasswordEcryptorArgon } from '@/external/encryption/passwordEncryptorArgon';
 import { UserRepositoryPrisma } from '@/external/repositories/postgres-prisma';

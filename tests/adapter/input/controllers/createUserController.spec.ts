@@ -1,6 +1,6 @@
 import { CreateUser } from '@/core/use-case/create-user';
 import { mock } from 'jest-mock-extended';
-import { CreateUserController } from '@/adapter/input/controllers/createUserController';
+import { CreateUserController } from '@/adapter/input/controllers/user/createUserController';
 import { left, right } from '@/shared/either';
 import { UserData } from '@/core/domain/user/userData';
 import { InvalidEmailError } from '@/core/domain/user/errors';
@@ -54,7 +54,7 @@ describe('Create User Controller', () => {
 	});
 
 	test('Should return 500 status and internal server error message', async () => {
-		createUser.createUser.mockRejectedValue(new Error('test'));
+		createUser.createUser.mockRejectedValue(new Error('test exception'));
 		const response = await createUserController.handle({
 			name: 'test',
 			email: 'test@test.com',

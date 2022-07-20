@@ -1,5 +1,5 @@
 import { ServerError } from '../errors/serverError';
-import { HttpResponse } from '../port';
+import { HttpResponse } from '../ports';
 
 //eslint-disable-next-line
 export const ok = (data: any): HttpResponse => ({
