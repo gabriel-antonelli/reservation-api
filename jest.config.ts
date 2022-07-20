@@ -2,7 +2,10 @@ import type { Config } from '@jest/types';
 
 const config: Config.InitialOptions = {
 	roots: ['<rootDir>/tests', 'src'],
-	collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
+	collectCoverageFrom: [
+		'<rootDir>/src/**/*.ts',
+		'!<rootDir>/src/**/ports/*.ts',
+	],
 	coverageDirectory: 'coverage',
 	testEnvironment: 'node',
 	transform: {
