@@ -11,4 +11,6 @@ const port = process.env.PORT;
 app.use(morganMiddleware, express.json(), helmet());
 setupRouter(app);
 
-app.listen(port, () => Logger.info(`Started server at ${port}`));
+export const server = app.listen(port, () =>
+	Logger.info(`Started server at ${port}`)
+);
