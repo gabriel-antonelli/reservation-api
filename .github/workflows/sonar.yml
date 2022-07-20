@@ -1,18 +1,38 @@
-name: Build
+name: Checks
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
-  sonarcloud:
-    name: SonarCloud
+  setup-node:
+    name: Setup Node
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out Git repository
+        uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 'lts/*'
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Check lint
+        run: npm run lint
+        
+      - name: Run Prettier
+        run: npm run prettier-check
+        
+      - name: Run coverage
+        run: npm run test:ci
+        
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
