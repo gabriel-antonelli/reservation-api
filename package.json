@@ -16,7 +16,7 @@
     "test:unit": "npm test -- -c jest-unit-config.ts",
     "test:integration": "npm run db-up && npm test -- -c jest-integration-config.ts",
     "test:staged": "npm test -- --findRelatedTests",
-    "test:ci": "npm test -- --coverage",
+    "test:ci": "npm run db-up && npm test -- --coverage",
     "prepare": "husky install"
   },
   "author": "Gabriel Antonelli",
