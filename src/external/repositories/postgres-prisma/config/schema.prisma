@@ -11,8 +11,8 @@ model User {
   Id              Int       @id @default(autoincrement())
   Email           String    @unique @db.VarChar(255)
   Name            String    @db.VarChar(255)
-  Password        String
-  Token           String?
+  Password        String    @unique
+  Token           String?   @unique
   TokenExpireDate DateTime?
   Event           Event[]
   Chair           Chair[]

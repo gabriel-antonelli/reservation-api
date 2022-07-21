@@ -21,9 +21,18 @@ export class UserRepositoryPrisma implements UserRepository {
 				Email: email,
 			},
 		});
-		if (unique) {
-			return true;
-		}
-		return false;
+		return !!unique;
+	}
+
+	async findTokenExpireDate(token: string): Promise<Date | null | undefined> {
+		const findToken = await prisma.user.findFirst({
+			where: {
+				Token: token,
+			},
+			select: {
+				TokenExpireDate: true,
+			},
+		});
+		return findToken?.TokenExpireDate;
 	}
 }
