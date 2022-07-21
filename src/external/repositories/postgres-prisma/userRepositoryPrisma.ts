@@ -9,6 +9,8 @@ export class UserRepositoryPrisma implements UserRepository {
 				Name: userData.name,
 				Email: userData.email,
 				Password: userData.password,
+				Token: userData.token,
+				TokenExpireDate: userData.tokenExpireDate,
 			},
 		});
 	}

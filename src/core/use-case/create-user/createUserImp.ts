@@ -5,12 +5,14 @@ import { UserAlreadyCreatedError } from './errors/userAlreadyCreatedError';
 import { UserRepository } from '../ports/userRepository';
 import { CreateUser } from './createUser';
 import { CreateUserResponse } from './createUserResponse';
-import { Encryptor } from '../ports';
+import { Encryptor, MailSender, RandomStringGenerator } from '../ports';
 
 export class CreateUserImp implements CreateUser {
 	constructor(
 		private readonly userRepository: UserRepository,
-		private readonly encryptor: Encryptor
+		private readonly encryptor: Encryptor,
+		private readonly mailSender: MailSender,
+		private readonly randomStringGenerator: RandomStringGenerator
 	) {}
 
 	async createUser(userData: UserData): Promise<CreateUserResponse> {
@@ -25,11 +27,20 @@ export class CreateUserImp implements CreateUser {
 			return left(new UserAlreadyCreatedError(email));
 		}
 		const hashedPassword = await this.encryptor.encrypt(user.password.value);
+		const emailVerifierToken = this.randomStringGenerator.generate();
+		const tokenExpireDate = new Date();
+		tokenExpireDate.setDate(tokenExpireDate.getDate() + 3);
+
 		await this.userRepository.create({
 			name: user.name.value,
 			email: email,
 			password: hashedPassword,
+			token: emailVerifierToken,
+			tokenExpireDate: tokenExpireDate,
 		});
+
+		await this.mailSender.send(email, user.name.value, emailVerifierToken);
+
 		return right(true);
 	}
 }
