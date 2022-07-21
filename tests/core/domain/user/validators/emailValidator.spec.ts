@@ -13,14 +13,6 @@ describe('Email validator', () => {
 		expect(isEmailValid('test @test.com')).toBeFalsy();
 	});
 
-	test('Should not accept a dot as last char at local part', () => {
-		expect(isEmailValid('teste.@teste.com')).toBeFalsy();
-	});
-
-	test('Should not accept a dot as first char at domain part', () => {
-		expect(isEmailValid('test@.test.com')).toBeFalsy();
-	});
-
 	test('Should not accept email with more than 255 characters', () => {
 		const longString = 't'.repeat(256);
 		const longEmail = `${longString}@test.com`;
