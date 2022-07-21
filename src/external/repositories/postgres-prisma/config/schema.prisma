@@ -14,7 +14,7 @@ model User {
   Password        String    @unique
   Token           String?   @unique
   TokenExpireDate DateTime?
-  IsVerified      Boolean?
+  IsVerified      Boolean   @default(false)
   Event           Event[]
   Chair           Chair[]
 }

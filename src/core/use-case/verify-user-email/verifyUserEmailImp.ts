@@ -20,6 +20,8 @@ export class VerifyUserEmailImp implements VerifyUserEmail {
 			return left(new ExpiredTokenError());
 		}
 
+		await this.userRepository.verifyUser(token);
+
 		return right(true);
 	}
 }

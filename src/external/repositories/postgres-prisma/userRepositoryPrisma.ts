@@ -35,4 +35,15 @@ export class UserRepositoryPrisma implements UserRepository {
 		});
 		return findToken?.TokenExpireDate;
 	}
+
+	async verifyUser(token: string): Promise<void> {
+		await prisma.user.update({
+			where: {
+				Token: token,
+			},
+			data: {
+				IsVerified: true,
+			},
+		});
+	}
 }
