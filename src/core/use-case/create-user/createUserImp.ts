@@ -30,7 +30,6 @@ export class CreateUserImp implements CreateUser {
 		const emailVerifierToken = this.randomStringGenerator.generate();
 		const tokenExpireDate = new Date();
 		tokenExpireDate.setDate(tokenExpireDate.getDate() + 3);
-
 		await this.userRepository.create({
 			name: user.name.value,
 			email: email,
