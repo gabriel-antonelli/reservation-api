@@ -5,12 +5,12 @@ import { UserAlreadyCreatedError } from './errors/userAlreadyCreatedError';
 import { UserRepository } from '../ports/userRepository';
 import { CreateUser } from './createUser';
 import { CreateUserResponse } from './createUserResponse';
-import { PasswordEncryptor } from '../ports';
+import { Encryptor } from '../ports';
 
 export class CreateUserImp implements CreateUser {
 	constructor(
 		private readonly userRepository: UserRepository,
-		private readonly passwordEncryptor: PasswordEncryptor
+		private readonly encryptor: Encryptor
 	) {}
 
 	async createUser(userData: UserData): Promise<CreateUserResponse> {
@@ -24,9 +24,7 @@ export class CreateUserImp implements CreateUser {
 		if (exists.valueOf()) {
 			return left(new UserAlreadyCreatedError(email));
 		}
-		const hashedPassword = await this.passwordEncryptor.encrypt(
-			user.password.value
-		);
+		const hashedPassword = await this.encryptor.encrypt(user.password.value);
 		await this.userRepository.create({
 			name: user.name.value,
 			email: email,

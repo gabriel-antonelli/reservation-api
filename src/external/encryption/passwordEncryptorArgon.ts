@@ -1,12 +1,12 @@
-import { PasswordEncryptor } from '@/core/use-case/ports';
+import { Encryptor } from '@/core/use-case/ports';
 import { hash, verify } from 'argon2';
 
-export class PasswordEcryptorArgon implements PasswordEncryptor {
-	async encrypt(password: string): Promise<string> {
-		return await hash(password);
+export class PasswordEcryptorArgon implements Encryptor {
+	async encrypt(text: string): Promise<string> {
+		return await hash(text);
 	}
 
-	async verify(hash: string, password: string): Promise<boolean> {
-		return verify(hash, password);
+	async verify(hash: string, text: string): Promise<boolean> {
+		return await verify(hash, text);
 	}
 }
