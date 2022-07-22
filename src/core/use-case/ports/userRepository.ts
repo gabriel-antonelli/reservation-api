@@ -5,4 +5,5 @@ export interface UserRepository {
 	create: (userData: UserData) => Promise<void>;
 	findTokenExpireDate: (token: string) => Promise<Date | null | undefined>;
 	verifyUser: (token: string) => Promise<void>;
+	findPasswordByEmail: (email: string) => Promise<string | null | undefined>;
 }

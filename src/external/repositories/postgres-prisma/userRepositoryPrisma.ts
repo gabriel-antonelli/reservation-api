@@ -46,4 +46,17 @@ export class UserRepositoryPrisma implements UserRepository {
 			},
 		});
 	}
+
+	async findPasswordByEmail(email: string): Promise<string | null | undefined> {
+		const findPassword = await prisma.user.findFirst({
+			where: {
+				Email: email,
+				IsVerified: true,
+			},
+			select: {
+				Password: true,
+			},
+		});
+		return findPassword?.Password;
+	}
 }
