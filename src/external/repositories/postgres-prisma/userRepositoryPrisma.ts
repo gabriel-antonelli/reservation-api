@@ -9,6 +9,8 @@ export class UserRepositoryPrisma implements UserRepository {
 				Name: userData.name,
 				Email: userData.email,
 				Password: userData.password,
+				Token: userData.token,
+				TokenExpireDate: userData.tokenExpireDate,
 			},
 		});
 	}
@@ -19,9 +21,29 @@ export class UserRepositoryPrisma implements UserRepository {
 				Email: email,
 			},
 		});
-		if (unique) {
-			return true;
-		}
-		return false;
+		return !!unique;
+	}
+
+	async findTokenExpireDate(token: string): Promise<Date | null | undefined> {
+		const findToken = await prisma.user.findFirst({
+			where: {
+				Token: token,
+			},
+			select: {
+				TokenExpireDate: true,
+			},
+		});
+		return findToken?.TokenExpireDate;
+	}
+
+	async verifyUser(token: string): Promise<void> {
+		await prisma.user.update({
+			where: {
+				Token: token,
+			},
+			data: {
+				IsVerified: true,
+			},
+		});
 	}
 }

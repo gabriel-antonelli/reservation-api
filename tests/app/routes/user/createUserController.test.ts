@@ -28,6 +28,8 @@ describe('POST /v1/user', () => {
 		expect(response.statusCode).toEqual(200);
 		expect(response.body).toEqual('Created user test');
 		expect(user).not.toBeNull();
+		expect(user?.Token).not.toBeNull();
+		expect(user?.TokenExpireDate).not.toBeNull();
 		expect(user?.Password).not.toEqual('test@T123');
 	});
 

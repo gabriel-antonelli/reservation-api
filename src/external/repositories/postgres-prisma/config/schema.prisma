@@ -8,14 +8,15 @@ datasource db {
 }
 
 model User {
-  Id                 Int       @id @default(autoincrement())
-  Email              String    @unique @db.VarChar(255)
-  Name               String    @db.VarChar(255)
-  Password           String
-  ResetPasswordToken String?
-  ResetPasswordDate  DateTime?
-  Event              Event[]
-  Chair              Chair[]
+  Id              Int       @id @default(autoincrement())
+  Email           String    @unique @db.VarChar(255)
+  Name            String    @db.VarChar(255)
+  Password        String    @unique
+  Token           String?   @unique
+  TokenExpireDate DateTime?
+  IsVerified      Boolean   @default(false)
+  Event           Event[]
+  Chair           Chair[]
 }
 
 model Event {

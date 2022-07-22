@@ -34,10 +34,11 @@ jobs:
         uses: KengoTODA/actions-setup-docker-compose@main
         with:
           version: '2.7.0'
-          
+
       - name: Run coverage
         env:
           POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
         run: npm run test:ci
 
       - name: SonarCloud Scan

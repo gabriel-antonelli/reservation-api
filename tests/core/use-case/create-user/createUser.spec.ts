@@ -1,15 +1,24 @@
 import { CreateUserImp } from '@/core/use-case/create-user';
-import { UserRepository, PasswordEncryptor } from '@/core/use-case/ports';
+import {
+	UserRepository,
+	Encryptor,
+	MailSender,
+	RandomStringGenerator,
+} from '@/core/use-case/ports';
 import { mock } from 'jest-mock-extended';
 import { UserAlreadyCreatedError } from '@/core/use-case/create-user/errors/userAlreadyCreatedError';
 import { InvalidPasswordError } from '@/core/domain/user/errors';
 
 describe('Create User', () => {
 	const userRepositoryMock = mock<UserRepository>();
-	const passwordEncryptorMock = mock<PasswordEncryptor>();
+	const passwordEncryptorMock = mock<Encryptor>();
+	const mailSenderMock = mock<MailSender>();
+	const randomStringGeneratorMock = mock<RandomStringGenerator>();
 	const createUser = new CreateUserImp(
 		userRepositoryMock,
-		passwordEncryptorMock
+		passwordEncryptorMock,
+		mailSenderMock,
+		randomStringGeneratorMock
 	);
 
 	test('Should create user', async () => {
