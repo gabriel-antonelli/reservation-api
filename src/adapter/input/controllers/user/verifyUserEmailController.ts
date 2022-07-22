@@ -17,7 +17,7 @@ export class VerifyUserEmailController implements Controller {
 			if (isUserValid.isLeft()) {
 				return badRequest(isUserValid.value);
 			}
-			return ok('User is valid');
+			return ok('User is verified');
 		} catch (error) {
 			return serverError(error as Error);
 		}
