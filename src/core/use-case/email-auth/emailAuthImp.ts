@@ -1,7 +1,6 @@
 import { Either, left, right } from '@/shared/either';
-import { Encryptor, UserRepository } from '../ports';
-import { JWT } from '../ports/jwtSigner';
-import { EmailAuth } from './emailAuth';
+import { Encryptor, UserRepository, JWT } from '@/core/use-case/ports';
+import { EmailAuth } from '@/core/use-case/email-auth';
 
 export class EmailAuthImp implements EmailAuth {
 	constructor(
