@@ -1,5 +1,5 @@
 import { mock } from 'jest-mock-extended';
-import { UserRepository } from '../ports';
+import { UserRepository } from '@/core/use-case/ports';
 import { VerifyUserEmailImp } from '@/core/use-case/verify-user-email';
 import {
 	ExpiredTokenError,
@@ -17,7 +17,7 @@ describe('Verify User Email', () => {
 		expect(verifyUserEmailResponse.value).toEqual(true);
 	});
 
-	test('Should throw invalid token error', async () => {
+	test('Should throw expired token error', async () => {
 		userRepositoy.findTokenExpireDate.mockResolvedValue(null);
 		const verifyUserEmailResponse = await verifyUserEmail.verify('test');
 

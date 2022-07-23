@@ -39,6 +39,7 @@ jobs:
         env:
           POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
         run: npm run test:ci
 
       - name: SonarCloud Scan
