@@ -1,4 +1,4 @@
-import { JWT } from '@/core/use-case/ports/jwtSigner';
+import { JWT } from '@/core/use-case/ports/jwtAuth';
 import jwt, { Secret } from 'jsonwebtoken';
 
 export class JsonWebTokenSigner implements JWT {

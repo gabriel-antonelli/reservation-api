@@ -1,6 +1,6 @@
 import { EmailAuthController } from '@/adapter/input/controllers/auth/emailAuthController';
 import { EmailAuthImp } from '@/core/use-case/email-auth';
-import { JsonWebTokenSigner } from '@/external/auth/json-web-token/jsonWebTokenSigner';
+import { JsonWebTokenSigner } from '@/external/auth/json-web-token/jsonWebTokenAuth';
 import { PasswordEcryptorArgon } from '@/external/encryption/passwordEncryptorArgon';
 import { UserRepositoryPrisma } from '@/external/repositories/postgres-prisma';
 
