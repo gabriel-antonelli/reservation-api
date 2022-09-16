@@ -12,6 +12,7 @@ model User {
   Email           String    @unique @db.VarChar(255)
   Name            String    @db.VarChar(255)
   Password        String    @unique
+  Bio             String?
   Token           String?   @unique
   TokenExpireDate DateTime?
   IsVerified      Boolean   @default(false)
