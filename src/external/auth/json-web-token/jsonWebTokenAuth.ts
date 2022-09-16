@@ -1,7 +1,7 @@
 import { JWT } from '@/core/use-case/ports/jwtAuth';
 import jwt, { Secret } from 'jsonwebtoken';
 
-export class JsonWebTokenSigner implements JWT {
+export class JsonWebTokenAuth implements JWT {
 	private readonly JWT_SECRET = process.env.JWT_SECRET;
 
 	async sign(subject: string): Promise<string> {
@@ -10,13 +10,18 @@ export class JsonWebTokenSigner implements JWT {
 		});
 	}
 
-	async verify(token: string): Promise<boolean> {
+	async verify(token: string): Promise<boolean | string> {
+		let decoded = null;
+
 		try {
-			jwt.verify(token, this.JWT_SECRET as Secret);
+			decoded = jwt.verify(token, this.JWT_SECRET as Secret);
 		} catch (error) {
 			return false;
 		}
 
-		return true;
+		if (decoded) {
+			return decoded as string;
+		}
+		return false;
 	}
 }
