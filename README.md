@@ -1,60 +1,64 @@
-# [reservation-api]()
+# [reservation-api]
 
-## Descrição
-Este projeto tem como objetivo criar uma Api que seja robusta o suficiente para fazer reservas para todo tipo de evento.
+Languagealso available in:[Portugues](lang-pt.md) 
 
-## Instalar e rodar o projeto
+## Description
 
-Rodar o Reservation-API em sua máquina local é simples como fazer uma reserva.
+This project aims to create an API that is robust enough to make reservations for all types of events.
 
-### Dependências globais
+## Install and run the project
 
-Você precisa ter apenas ter a seguinte ferramenta instalada:
+Running Reservation-API on your local machine is as simple as making a reservation.
 
-- Node.js LTS v16 (ou qualquer versão superior)
-- Docker (versão 20.10 ou superior)
+### Global dependencies
 
-### Rodar o projeto
+You only need to have the following tool installed:
 
-Para rodar o projeto localmente, basta rodar o comando abaixo:
+- Node.js LTS v16 (or any higher version)
+- Docker (version 20.10 or higher)
+
+### Run project
+
+To run the project locally, just run the command below:
 
 ```bash
 npm install
 ````
 
-Para conseguir rodar o projeto crie um arquivo `.env` e siga com os mesma estrutura que está em `.env.example`, passando todos os parâmetros necessários você pode seguir para o próximo passo.
+To be able to run the project create an `.env` file and follow with the same structure that is in `.env.example`, passing all the necessary parameters you can proceed to the next step.
 
 ```bash
 npm run start
 ````
 
-Com isso a aplicação irá subir e o servidor será exposto no endereço:
+With that, the application will go up and the server will be exposed at the address:
+
 
 ```bash
 http://localhost:3000/
 ```
 
-### Rodar os testes
+### Run tests
 
-Há várias formas de rodar os testes, mas deixamos configurado alguns comandos para ajudar, o primeiro roda os testes unitários e os de integração.
+There are several ways to run the tests, but we leave some commands configured to help, the first runs the unit and integration tests.
 
 ```bash
 npm run test
 ```
 
-Para rodar os testes unitários:
+To run the unit tests:
 
 ```bash
 npm run test:unit
 ```
 
-Para rodar os testes integração:
+To run the integration tests:
 
 ```bash
 npm run test:integration 
 ```
 
-Para ver a coverage do projeto:
+To view project coverage:
 
 ```bash
 npm run test:ci
