@@ -11,17 +11,15 @@ export class JsonWebTokenAuth implements JWT {
 	}
 
 	async verify(token: string): Promise<boolean | string> {
-		let decoded = null;
-
 		try {
-			decoded = jwt.verify(token, this.JWT_SECRET as Secret);
+			const decoded = jwt.verify(token, this.JWT_SECRET as Secret);
+			if (decoded) {
+				return decoded as string;
+			}
 		} catch (error) {
 			return false;
 		}
 
-		if (decoded) {
-			return decoded as string;
-		}
 		return false;
 	}
 }
