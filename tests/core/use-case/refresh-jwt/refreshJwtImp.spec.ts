@@ -8,7 +8,7 @@ describe('Refresh JWT', () => {
 
 	test('Should return new token', async () => {
 		const TOKEN = 'newtoken';
-		jwtSigner.verify.mockResolvedValue('email@email');
+		jwtSigner.verify.mockResolvedValue({ email: 'email@email' });
 		jwtSigner.sign.mockResolvedValue(TOKEN);
 
 		const refreshToken = await refreshJwt.refresh('oldToken');

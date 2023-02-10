@@ -1,4 +1,4 @@
-import { JWT } from '../ports';
+import { DecodedJWT, JWT } from '../ports';
 import { RefreshJWT } from './refreshJwt';
 
 export class RefreshJwtImp implements RefreshJWT {
@@ -7,7 +7,8 @@ export class RefreshJwtImp implements RefreshJWT {
 	async refresh(jwt: string): Promise<string | boolean> {
 		const decodedJwt = await this.jwtSigner.verify(jwt);
 		if (decodedJwt) {
-			return await this.jwtSigner.sign(decodedJwt as string);
+			const email = (decodedJwt as DecodedJWT).email;
+			return await this.jwtSigner.sign(email);
 		}
 		return false;
 	}

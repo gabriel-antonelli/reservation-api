@@ -1,4 +1,4 @@
-import { JWT } from '@/core/use-case/ports';
+import { DecodedJWT, JWT } from '@/core/use-case/ports';
 import jwt, { Secret } from 'jsonwebtoken';
 
 export class JsonWebTokenAuth implements JWT {
@@ -6,15 +6,15 @@ export class JsonWebTokenAuth implements JWT {
 
 	async sign(subject: string): Promise<string> {
 		return jwt.sign({ email: subject }, this.JWT_SECRET as Secret, {
-			expiresIn: '24h',
+			expiresIn: '5m',
 		});
 	}
 
-	async verify(token: string): Promise<boolean | string> {
+	async verify(token: string): Promise<boolean | DecodedJWT> {
 		try {
 			const decoded = jwt.verify(token, this.JWT_SECRET as Secret);
 			if (decoded) {
-				return decoded as string;
+				return decoded as DecodedJWT;
 			}
 		} catch (error) {
 			return false;
