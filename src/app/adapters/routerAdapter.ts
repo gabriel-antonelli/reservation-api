@@ -3,9 +3,11 @@ import { Controller } from '@/adapter/input/ports';
 
 export const routerAdapter = (controller: Controller) => {
 	return async (req: Request, res: Response): Promise<Response> => {
+		const authHeader = 'X-AUTH';
 		const httpRequest = {
 			...(req.body || {}),
 			...(req.params || {}),
+			jwt: req.get(authHeader),
 		};
 		const httpResponse = await controller.handle(httpRequest);
 		return res.status(httpResponse.statusCode).json(httpResponse.body);
