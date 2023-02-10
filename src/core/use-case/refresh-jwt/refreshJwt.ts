@@ -1,3 +1,3 @@
 export interface RefreshJWT {
-	refresh: (jwt: string) => Promise<boolean | string>;
+	refresh: (email: string) => Promise<string>;
 }

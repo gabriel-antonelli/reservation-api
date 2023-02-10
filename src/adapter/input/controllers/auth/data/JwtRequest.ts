@@ -1,3 +1,3 @@
 export interface JwtRequest {
-	jwt: string;
+	authUserEmail: string;
 }

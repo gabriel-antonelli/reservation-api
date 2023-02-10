@@ -16,12 +16,4 @@ describe('Refresh JWT', () => {
 		expect(refreshToken).not.toBeFalsy();
 		expect(refreshToken).toEqual(TOKEN);
 	});
-
-	test('Should return false if false returned from verify', async () => {
-		jwtSigner.verify.mockResolvedValue(false);
-
-		const refreshToken = await refreshJwt.refresh('oldToken');
-
-		expect(refreshToken).toEqual(false);
-	});
 });

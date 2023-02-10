@@ -14,13 +14,12 @@ export class RefreshJwtController implements Controller {
 
 	async handle(req: JwtRequest): Promise<HttpResponse> {
 		try {
-			const hasToken = validateRequest(['jwt'], req);
+			const hasToken = validateRequest(['authUserEmail'], req);
 
 			if (hasToken.isLeft()) {
 				return badRequest(hasToken.value);
 			}
-
-			const refreshToken = await this.refreshJwt.refresh(req.jwt);
+			const refreshToken = await this.refreshJwt.refresh(req.authUserEmail);
 
 			if (!refreshToken) {
 				return unauthorizedRequest();
