@@ -6,7 +6,7 @@ export class JsonWebTokenAuth implements JWT {
 
 	async sign(subject: string): Promise<string> {
 		return jwt.sign({ email: subject }, this.JWT_SECRET as Secret, {
-			expiresIn: '5m',
+			expiresIn: process.env.JWT_EXPIRATION,
 		});
 	}
 
