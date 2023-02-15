@@ -1,4 +1,4 @@
-import { RefreshJWT } from '@/core/use-case/refresh-jwt';
+import { AuthResponseGenerator } from '@/core/use-case/auth-response-generator/authResponseGenerator';
 import {
 	ok,
 	badRequest,
@@ -10,7 +10,7 @@ import { validateRequest } from '../../validators/requestValidator';
 import { JwtRequest } from './data/JwtRequest';
 
 export class RefreshJwtController implements Controller {
-	constructor(private readonly refreshJwt: RefreshJWT) {}
+	constructor(private readonly authResponseGenerator: AuthResponseGenerator) {}
 
 	async handle(req: JwtRequest): Promise<HttpResponse> {
 		try {
@@ -19,15 +19,16 @@ export class RefreshJwtController implements Controller {
 			if (hasToken.isLeft()) {
 				return badRequest(hasToken.value);
 			}
-			const refreshToken = await this.refreshJwt.refresh(req.authUserEmail);
+			const authResponse =
+				await this.authResponseGenerator.generateAuthResponse(
+					req.authUserEmail
+				);
 
-			if (!refreshToken) {
+			if (!authResponse) {
 				return unauthorizedRequest();
 			}
 
-			return ok({
-				RefreshToken: refreshToken,
-			});
+			return ok(authResponse);
 		} catch (error) {
 			return serverError(error as Error);
 		}

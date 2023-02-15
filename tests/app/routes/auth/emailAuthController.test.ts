@@ -38,7 +38,8 @@ describe('POST /v1/auth/email', () => {
 		expect(response.statusCode).toEqual(200);
 		expect(response.body).toMatchObject({
 			Authorized: true,
-			Token: expect.any(String),
+			token: expect.any(String),
+			refreshToken: expect.any(String),
 		});
 	});
 

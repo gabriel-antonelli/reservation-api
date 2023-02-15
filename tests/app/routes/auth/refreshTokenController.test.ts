@@ -8,7 +8,7 @@ describe('GET /v1/auth/refresh-token', () => {
 	});
 
 	test('Should return 200 status and token', async () => {
-		const token = await new JsonWebTokenAuth().sign('test@test.com');
+		const token = await new JsonWebTokenAuth().sign('test@test.com', '1m');
 
 		const response = await request(server)
 			.get('/api/v1/auth/refresh-token')
@@ -16,7 +16,8 @@ describe('GET /v1/auth/refresh-token', () => {
 
 		expect(response.statusCode).toEqual(200);
 		expect(response.body).toMatchObject({
-			RefreshToken: expect.any(String),
+			token: expect.any(String),
+			refreshToken: expect.any(String),
 		});
 	});
 

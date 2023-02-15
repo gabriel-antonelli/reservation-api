@@ -7,9 +7,13 @@ import { EmailAuthRequest } from '@/adapter/input/controllers/auth/data/emailAut
 describe('Email Auth Controller', () => {
 	const emailAuth = mock<EmailAuth>();
 	const emailAuthController = new EmailAuthController(emailAuth);
+	const authResponse = {
+		token: 'testToken',
+		refreshToken: 'refreshToken',
+	};
 
 	test('Should return 200 and token', async () => {
-		emailAuth.auth.mockResolvedValue(right('testToken'));
+		emailAuth.auth.mockResolvedValue(right(authResponse));
 		const response = await emailAuthController.handle({
 			email: 'test@test.com',
 			password: 'test',
@@ -18,7 +22,7 @@ describe('Email Auth Controller', () => {
 		expect(response.statusCode).toEqual(200);
 		expect(response.body).toEqual({
 			Authorized: true,
-			Token: 'testToken',
+			...authResponse,
 		});
 	});
 

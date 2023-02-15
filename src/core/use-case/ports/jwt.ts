@@ -5,6 +5,6 @@ export interface DecodedJWT {
 }
 
 export interface JWT {
-	sign: (subject: string) => Promise<string>;
+	sign: (subject: string, expiration: string) => Promise<string>;
 	verify: (token: string) => Promise<boolean | DecodedJWT>;
 }
