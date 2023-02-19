@@ -1,2 +1,1 @@
-export * from './createUserControllerFactory';
-export * from './verifyUserEmailControllerFactory';
+export * from './controllers';

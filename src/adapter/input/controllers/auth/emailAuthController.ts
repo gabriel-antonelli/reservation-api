@@ -28,9 +28,11 @@ export class EmailAuthController implements Controller {
 				return unauthorizedRequest();
 			}
 
+			const authResponse = isUserAuthorized.value;
+
 			return ok({
 				Authorized: true,
-				Token: isUserAuthorized.value,
+				...authResponse,
 			});
 		} catch (error) {
 			return serverError(error as Error);
